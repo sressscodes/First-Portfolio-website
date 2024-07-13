@@ -1,23 +1,49 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import ProjectItems from './ProjectItems'
 import artImg from '../assets/art.png'
 import creditImg from '../assets/credit.png'
 import paymentImg from '../assets/payment.png'
 import zaffreanImg from '../assets/zaffrean.png'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 const Projects = () => {
+
+  const projectRef = useRef()
+
+  useGSAP(()=>{
+    var tl = gsap.timeline()
+    tl.from(projectRef.current,{
+      opacity:0,
+      y:40,
+      delay:0.6,
+      duration:0.5,
+      scrollTrigger: {
+        trigger: projectRef.current,
+        start: "top 70%",
+        end: "top 40%",
+        scrub: true,
+        markers: false
+      }
+    })
+  })
+
   return (
-    <div id='projects' className='max-w-[1040px] m-auto md:pl-20 p-4 y-16'>
-        <h1 className='text-4xl font-bold text-center text-[#184c64]'>Projects</h1>
-        <p className='text-center py-8' >
-        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. 
-        </p>
-        <div className='grid sm:grid-cols-2 gap-12'>
+    <div id='projects' className='flex flex-col items-center justify-center bg-black z-[1] pb-20'>
+      <div className='mx-48'>
+        <div className=''>
+        <h1 ref={projectRef} className='m:text-5xl text-4xl font-bold  text-center'>
+          <span className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text'>My Projects</span>
+        </h1>
+      </div>
+        
+        <div className='grid sm:grid-cols-2 gap-16 mt-32'>
           <ProjectItems img= {artImg} title="Art App"  />
           <ProjectItems img= {creditImg} title="Credit App" />
           <ProjectItems img= {paymentImg} title="PaymentApp" /> 
           <ProjectItems img= {zaffreanImg} title="Zaffrean App" />
         </div>
+      </div>
     </div> 
   )
 }
