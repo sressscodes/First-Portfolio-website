@@ -9,9 +9,9 @@ const Svg = () => {
   useGSAP(()=>{
     var tl = gsap.timeline()
     tl.from(moveRef.current,{
-      x:-1270,
+      x:-1400,
       delay:0.8,
-      duration:1,
+      duration:2,
       scrollTrigger: {
         trigger: moveRef.current,
         start: "top 100%",
